@@ -6,10 +6,10 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 const app = (module.exports = express());
-const port = parseInt(process.env.PORT || 3000);
+const port = parseInt(process.env.PORT || 3333);
 const request = require("request");
 
-require('dotenv').config();
+require("dotenv").config();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,27 +27,31 @@ app.get("/", (req, res, next) => {
   );
 });
 
-app.get("/test", (req, res, next) => {
+app.post("/document", (req, res, next) => {
+  console.log(req.body, "Heyo");
 
-  var options = { method: 'GET',
-  url: 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone',
-  qs: 
-    { version: '2017-09-21',
-      text: "team for once in your life stop messing around. I am so angry right now. you have failed!!!" },
-  headers: 
-    { 'Postman-Token': '8078eb86-513f-4f7b-b9d7-ddcd2b62df02',
-      'cache-control': 'no-cache',
-      Authorization: 'Basic ' + process.env.IBM_SECRET,
-      'Content-Type': 'application/json' } };
+  var options = {
+    method: "GET",
+    url: "https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone",
+    qs: {
+      version: "2017-09-21",
+      text: req.body.text
+    },
+    headers: {
+      "Postman-Token": "8078eb86-513f-4f7b-b9d7-ddcd2b62df02",
+      "cache-control": "no-cache",
+      Authorization: "Basic " + process.env.IBM_SECRET,
+      "Content-Type": "application/json"
+    }
+  };
 
-request(options, function (error, response, body) {
-  if (error) throw new Error(error);
+  request(options, function(error, response, body) {
+    if (error) throw new Error(error);
 
-  res.json(JSON.parse(body))
+    res.json(body);
 
-  console.log(body);
-});
-
+    console.log(body);
+  });
 
 });
 
