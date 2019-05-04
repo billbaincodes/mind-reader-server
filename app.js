@@ -23,7 +23,7 @@ app.use(cors({ origin: true, credentials: true })); // <= Disable if you don't n
 
 app.get("/", (req, res, next) => {
   res.json(
-    "Template from Dan's Guides: https://github.com/justsml/guides/tree/master/express/setup-guide"
+    "Welcome to the Mind Reader"
   );
 });
 
