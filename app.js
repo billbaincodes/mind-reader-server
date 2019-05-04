@@ -48,18 +48,8 @@ app.post("/document", (req, res, next) => {
 
   request(options, function(error, response, body) {
     if (error) throw new Error(error);
-    console.log({body}, {error}, {response});
-
     res.json(body);
-
   });
-
-});
-
-app.post("/test", (req, res, next) => {
-  
-  console.log({secret : process.env.IBM_SECRET})
-  res.json("you hit the test route")
 
 });
 
