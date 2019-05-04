@@ -7,8 +7,9 @@ const morgan = require("morgan");
 const cors = require("cors");
 const app = (module.exports = express());
 const port = parseInt(process.env.PORT || 3000);
-var request = require("request");
+const request = require("request");
 
+require('dotenv').config();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -36,7 +37,7 @@ app.get("/test", (req, res, next) => {
   headers: 
     { 'Postman-Token': '8078eb86-513f-4f7b-b9d7-ddcd2b62df02',
       'cache-control': 'no-cache',
-      Authorization: 'Basic XXXXXXXXXXXXXXXXXXXXXXXXX',
+      Authorization: 'Basic ' + process.env.IBM_SECRET,
       'Content-Type': 'application/json' } };
 
 request(options, function (error, response, body) {
