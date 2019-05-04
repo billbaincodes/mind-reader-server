@@ -28,7 +28,8 @@ app.get("/", (req, res, next) => {
 });
 
 app.post("/document", (req, res, next) => {
-  console.log(req.body, "Heyo");
+
+  console.log(req.body)
 
   var options = {
     method: "GET",
@@ -47,11 +48,17 @@ app.post("/document", (req, res, next) => {
 
   request(options, function(error, response, body) {
     if (error) throw new Error(error);
+    console.log({body}, {error}, {response});
 
     res.json(body);
 
-    console.log(body);
   });
+
+});
+
+app.post("/test", (req, res, next) => {
+
+  res.json(req.body)
 
 });
 
