@@ -59,7 +59,7 @@ app.post("/document", (req, res, next) => {
 app.post("/test", (req, res, next) => {
   
   console.log({secret : process.env.IBM_SECRET})
-  res.json(stringify(req.body))
+  res.json("you hit the test route")
 
 });
 
